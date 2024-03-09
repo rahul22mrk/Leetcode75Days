@@ -7,7 +7,6 @@ class Solution {
                max=i;
            }
        }
-
        for(int i:candies){
            res.add(i+extraCandies>=max);
        }
