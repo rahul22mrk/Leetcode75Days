@@ -8,6 +8,7 @@ class Solution {
                 i++;
                 flag=false;
             }
+
             if(!isVowel(s.charAt(j))){
                 j--;
                 flag=false;
