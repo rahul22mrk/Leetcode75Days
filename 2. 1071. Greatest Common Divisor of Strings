@@ -3,7 +3,6 @@ class Solution {
         if((str1+str2).equals(str2+str1)){
             int len1 = str1.length();
             int len2 = str2.length();
-
             int gcdOfNum = gcd(len1,len2);
             String ans = str1.substring(0,gcdOfNum);
             return ans;
