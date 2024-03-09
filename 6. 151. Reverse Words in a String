@@ -7,7 +7,6 @@ class Solution {
             while(i>=0 && s.charAt(i)==' '){
                 i--;
             }
-
             if(i<0){
                 break;
             }
