@@ -1,0 +1,30 @@
+class Solution {
+    public int maxVowels(String s, int k) {
+        int cnt =0;
+        int maxCnt = 0;
+        int start = 0,end =0;
+        while(end<s.length()){
+            //expansion
+            if(checkVowel(s.charAt(end++))){
+                cnt++;
+            }
+
+            while(start<end && end-start>k){
+                 if(checkVowel(s.charAt(start++))){
+                    cnt--;
+                 }
+            }
+
+              maxCnt = Math.max(cnt,maxCnt);
+        }
+        return maxCnt;
+        
+    }
+
+    public boolean checkVowel(char ch){
+        if(ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u'){
+            return true;
+        }
+        return false;
+    }
+}
