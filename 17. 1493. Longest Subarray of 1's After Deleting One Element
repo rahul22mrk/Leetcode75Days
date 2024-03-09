@@ -1,0 +1,29 @@
+class Solution {
+    public int longestSubarray(int[] nums) {
+        int start = 0;
+        int end = 0;
+        int maxCnt = 0;
+        int flips = 0;
+        while(end<nums.length){
+            if(nums[end]==0){
+                flips++;
+                
+            }
+            end++;
+            while(flips>1){
+                if(nums[start]==0){
+                    flips--;
+                }
+                start++;
+            }
+            if(flips==1)
+            maxCnt = Math.max(maxCnt,end-start);
+        }
+        
+        //if(flag==0){
+           // maxCnt--;
+       // }
+        return maxCnt;
+        
+    }
+}
