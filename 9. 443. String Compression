@@ -7,6 +7,7 @@ class Solution {
             while(i+cnt<chars.length && chars[i+cnt]==chars[i]){
                 cnt++;
             }
+
             chars[k++]=chars[i];
             if(cnt>1){
                 for(char ch: Integer.toString(cnt).toCharArray()){
