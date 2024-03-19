@@ -6,7 +6,6 @@ class Solution {
         for(int i:arr){
             hm.put(i,hm.getOrDefault(i, 0)+1);
         }
-
         for(HashMap.Entry<Integer,Integer> e: hm.entrySet()){
             if(hs.contains(e.getValue())){
                 return false;
