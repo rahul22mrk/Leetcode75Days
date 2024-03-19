@@ -6,6 +6,6 @@ class Solution {
             highest = Math.max(sum,highest);
         }
         return highest;
-        
+
     }
 }
