@@ -4,7 +4,6 @@ class Solution {
         if(word1.length() != word2.length()){
             return false;
         }
-
         int f1[] = new int[26];
         int f2[] = new int[26];
 
