@@ -1,33 +1,45 @@
 class Solution {
     public int[] asteroidCollision(int[] asteroids) {
         Stack<Integer> st = new Stack<Integer>();
-        for(Integer i : asteroids){
-            boolean flag1 =true;
-                while(!st.isEmpty()&& (i<0 && st.peek()>0)){
-                      
-                        if(Math.abs(st.peek())<Math.abs(i)){
-                           st.pop();
-                           continue;
-                        }
-                        else if(Math.abs(st.peek())==Math.abs(i)){
-                            st.pop();
-                            
-                        }
-                        flag1 = false;
+
+        for(int asteroid:asteroids){
+            //right //empty
+            if(st.isEmpty()|| asteroid>0){
+                st.push(asteroid);
+            }else{
+                //right and left (collision possible)
+                while(!st.isEmpty() && st.peek()>0){
+                    int right = st.peek();
+
+                    //equal
+                    if(right == -asteroid){
+                        asteroid = 0;
+                        st.pop();
                         break;
-                }
-                if(flag1){
-                    st.push(i);
-                }
-        }
-        int arr[] = new int[st.size()];
-        int j = arr.length-1;
+                    }
+                    //less (r < l)
+                    else if(right < -asteroid){
+                        st.pop();
+                    }
+                    //r > l
+                    else{
+                        asteroid = 0;
+                        break;
+                    }
 
-        while(!st.isEmpty()){
-            arr[j--]= st.pop();
+                }
+
+                if(asteroid !=0){
+                    st.push(asteroid);
+                }
+            }
         }
 
-        return arr;
-       
+        int res[] = new int[st.size()];
+        for(int i=st.size()-1;i>=0;i--){
+            res[i] = st.pop();
+        }
+        return res;
+        
     }
 }
