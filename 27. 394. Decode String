@@ -1,0 +1,42 @@
+class Solution {
+    public String decodeString(String s) { 
+        Stack<String>st1 = new Stack<>();
+        Stack<Integer>st2 = new Stack<>();
+        String res = "";
+        int num=0;
+        for(int i =0;i <s.length();i++){
+            if(s.charAt(i)>='0'&&s.charAt(i)<='9'){
+                num = num*10+(s.charAt(i)-'0');
+            }else if(s.charAt(i)=='['){
+                st2.push(num);
+                num=0;
+                st1.push("[");
+            }else if(s.charAt(i)==']'){
+                int count = st2.pop();
+                StringBuilder sb = new StringBuilder();
+                while(!st1.isEmpty()&& st1.peek()!="["){
+                    sb.insert(0,st1.pop());
+                }
+                st1.pop();
+                StringBuilder temp = new StringBuilder();
+                while(count-->0){
+                    temp = temp.append(sb);
+                }
+               st1.push(temp.toString());
+
+            }else{
+                st1.push(s.charAt(i)+"");
+            }
+        }
+
+              StringBuilder sb = new StringBuilder();
+        while(!st1.isEmpty()){
+                sb.insert(0,st1.pop());
+        }
+        res = res+ sb.toString();
+
+        return res;
+    }
+
+    
+}
