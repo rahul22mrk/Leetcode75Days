@@ -1,0 +1,40 @@
+class Solution {
+    public String predictPartyVictory(String senate) {
+        int rCount =0,rBan=0,dCount=0,dBan=0;
+        Queue<Character> q = new LinkedList<Character>();
+
+        for(int i=0;i<senate.length();i++){
+            q.add(senate.charAt(i));
+
+            if(senate.charAt(i)=='R'){
+                rCount++;
+            }else{
+                dCount++;
+            }
+        }
+
+        while(dCount>0 && rCount>0){
+            char ch = q.remove();
+            if(ch=='R'){
+                if(rBan>0){
+                    rBan--;
+                    rCount--;
+                }else{
+                    dBan++;
+                    q.add(ch);
+                }
+
+            }else{
+                if(dBan>0){
+                    dBan--;
+                    dCount--;
+                }else{
+                    rBan++;
+                    q.add(ch);
+                }
+            }
+        }
+        return rCount>0 ? "Radiant" : "Dire";
+        
+    }
+}
