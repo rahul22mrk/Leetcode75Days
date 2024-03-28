@@ -1,0 +1,25 @@
+class RecentCounter {
+    LinkedList<Integer> req;
+
+    public RecentCounter() {
+        req = new LinkedList<Integer>();
+        
+    }
+    
+    public int ping(int t) {
+        req.add(t);
+
+        while(req.getFirst()< t-3000){
+            req.remove();
+        }
+
+        return req.size();
+        
+    }
+}
+
+/**
+ * Your RecentCounter object will be instantiated and called as such:
+ * RecentCounter obj = new RecentCounter();
+ * int param_1 = obj.ping(t);
+ */
