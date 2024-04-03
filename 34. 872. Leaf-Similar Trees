@@ -1,0 +1,58 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    int index=0;
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        preOrderTraversal(root1,list);
+        boolean ans = postOrderTraversal(root2,list);
+        return index!=list.size()?false:ans;
+        
+    }
+
+    private void preOrderTraversal(TreeNode root,ArrayList<Integer>list){
+        if(root==null){
+            return ;
+        }
+
+        if(root.left==null && root.right==null){
+            list.add(root.val);
+        }
+
+        preOrderTraversal(root.left,list);
+        preOrderTraversal(root.right,list);
+    }
+
+    private boolean postOrderTraversal(TreeNode root,ArrayList<Integer>list){
+        if(root==null){
+            return true;
+        }
+
+        boolean left=postOrderTraversal(root.left,list);
+        boolean right = postOrderTraversal(root.right,list);
+
+        if(root.left==null&& root.right==null){
+            if(index>list.size()){
+                return false;
+            }else if(index< list.size() && list.get(index)!=root.val){
+                return false;
+            }
+            index++;
+        }
+        return left&&right;
+
+    }
+}
