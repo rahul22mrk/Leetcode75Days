@@ -1,0 +1,24 @@
+class Solution {
+    boolean visitedRoom[];
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        visitedRoom = new boolean[rooms.size()];
+        visitedRoom[0]=true;//we always start with first room
+
+        dfs(rooms,0);
+        //now we will check any room visited or not, if single room is not visited then we will return false
+        for(boolean b:visitedRoom){
+            if(!b)return false;
+        }
+        return true;
+    }
+
+    private void dfs(List<List<Integer>>rooms,int key){
+        for(int room : rooms.get(key)){
+            //here we checking particular room visited or not if not visited then mark it visited and go to that room and proceed same
+            if(!visitedRoom[room]){
+                visitedRoom[room]=true;
+                dfs(rooms,room);
+            }
+        }
+    }
+}
