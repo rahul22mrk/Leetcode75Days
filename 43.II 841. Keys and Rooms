@@ -1,0 +1,30 @@
+class Solution {
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        boolean visitedRoom[]= new boolean[rooms.size()];
+        Queue<Integer> queue = new LinkedList<Integer>();
+        visitedRoom[0] = true; //first room alwasys visited
+
+        for(int i=0;i<rooms.get(0).size();i++){
+            queue.add(rooms.get(0).get(i));
+        }
+
+        while(!queue.isEmpty()){
+            int key = queue.poll();
+            visitedRoom[key]= true; //mark room is visted if key is present for that room
+
+            for(int room : rooms.get(key)){
+                //if room is not visited then we will add that key in our queue otherwise not required
+                if(!visitedRoom[room]){
+                    queue.add(room);
+                }
+            }
+        }
+
+        //now we will check room visited or not
+        for(boolean b: visitedRoom){
+            if(!b)return false;
+        }
+        return true;
+        
+    }
+}
