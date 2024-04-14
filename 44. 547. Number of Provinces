@@ -1,0 +1,44 @@
+class Solution {
+    boolean isVisited[];
+    public int findCircleNum(int[][] isConnected) {
+        //total no of rooms
+        int totalRooms = isConnected.length;
+        isVisited = new boolean[totalRooms];
+
+        //count different no of group
+        int cnt=0;
+
+        //visit room one by one and check and count
+        for(int i=0;i<totalRooms;i++){
+            //if room is not visited then increase count by 1 and visit the room using dfs method
+            if(!isVisited[i]){
+                cnt++;
+                dfs(i,totalRooms,isConnected);
+            }
+        }
+
+        //this will return total no of group 
+        return cnt;
+        
+    }
+
+    private void dfs(int currentRoom,int totalRooms,int [][]isConnected){
+        isVisited[currentRoom]=true;
+        //now we find ount connected room of current room 
+        List<Integer> adjRooms = new ArrayList<Integer>();
+        for(int i=0;i<isConnected[currentRoom].length;i++){
+            if(isConnected[currentRoom][i]==1){
+                adjRooms.add(i);
+            }
+        }
+
+        //now we visit every room which is connected to current room , 
+        //so we make group of room which is connected to current room
+        for(int room:adjRooms){
+            //if room is not visited then we visit 
+            if(!isVisited[room]){
+                dfs(room,totalRooms,isConnected);
+            }
+        }
+    }
+}
