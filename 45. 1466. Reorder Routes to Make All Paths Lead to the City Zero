@@ -1,0 +1,28 @@
+class Solution {
+    int cnt=0;
+    public int minReorder(int n, int[][] connections) {
+        List<int[]> adj[]=new List[n];
+        for(int i=0;i<n;i++){
+            adj[i]= new ArrayList<>();
+        }
+
+        for(int[]connection : connections){
+            adj[connection[0]].add(new int[]{connection[1],1});
+            adj[connection[1]].add(new int[]{connection[0],0});
+        }
+        dfs(0,adj,-1);
+        return cnt;
+        
+    }
+
+    private void dfs(int child,List<int[]>adj[],int parent){
+        for(int[] adjacent : adj[child]){
+            int neighbour = adjacent[0];
+            int direction = adjacent[1];
+            if(neighbour!=parent){
+                cnt+=direction;
+                dfs(neighbour,adj,child);
+            }
+        }
+    }
+}
