@@ -1,0 +1,43 @@
+class Solution {
+    public int nearestExit(char[][] maze, int[] entrance) {
+        int m = maze.length;
+        int n = maze[0].length;
+        int [][]directions = {{0,1},{0,-1},{1,0},{-1,0}};//right,left,down,up
+
+        Queue<int[]> queue = new LinkedList<>();
+        queue.offer(entrance);
+
+        maze[entrance[0]][entrance[1]] ='+';
+        int step=0;
+        while(!queue.isEmpty()){
+            int size = queue.size();
+
+            for(int i=0;i<size;i++){
+                int []curr=queue.poll();
+
+                //check if current is exit point or not and also we check it is not an entrance point
+                if((curr[0] != entrance[0] || curr[1] != entrance[1])&&(curr[0] ==0 || curr[0] ==m-1 || curr[1] ==0 || curr[1] == n-1 )){
+                    return step++;
+                }
+                 //now we check neighbours 
+                for(int [] dir: directions){
+                    int newRow = curr[0] + dir[0];
+                    int newCol = curr[1] + dir[1];
+                    //if newRow and newCol is valid and not visit then we add this is our queue
+                    if((newRow>=0 &&newRow<m &&newCol>=0&&newCol<n)&& maze[newRow][newCol]=='.'){
+                        maze[newRow][newCol]='+';
+                        queue.offer(new int[]{newRow,newCol});
+                    }
+                }
+
+            }
+
+           
+            //increase step
+            step++;
+        }
+        //if exit not found 
+        return -1;
+        
+    }
+}
