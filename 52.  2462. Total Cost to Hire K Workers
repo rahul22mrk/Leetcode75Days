@@ -1,0 +1,28 @@
+class Solution {
+    public long totalCost(int[] costs, int k, int candidates) {
+        Queue<Integer>pq1 = new PriorityQueue<>();
+        Queue<Integer>pq2 = new PriorityQueue<>();
+        int i=0,j=costs.length-1;
+        long ans=0;
+        while(k-->0){
+            while(i<=j&& pq1.size()<candidates){
+                pq1.add(costs[i++]);
+            }
+            while(i<=j&& pq2.size()<candidates){
+                pq2.add(costs[j--]);
+            }
+
+            int min1 = pq1.size()>0?pq1.peek():Integer.MAX_VALUE;
+            int min2 = pq2.size()>0?pq2.peek():Integer.MAX_VALUE;
+
+            if(min1<=min2){
+                ans +=min1;
+                pq1.poll();
+            }else{
+                ans +=min2;
+                pq2.poll();
+            }
+        }
+        return ans;
+    }
+}
