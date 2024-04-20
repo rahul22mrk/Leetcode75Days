@@ -1,0 +1,70 @@
+Approach -1
+class SmallestInfiniteSet {
+    PriorityQueue<Integer> pq;
+    HashSet<Integer> hs;
+
+    public SmallestInfiniteSet() {
+        pq = new PriorityQueue<>(1000);
+        hs = new HashSet<>(1000);
+        for(int i=0;i<1000;i++){
+            pq.add(i+1);
+            hs.add(i+1);
+        }
+        
+    }
+    
+    public int popSmallest() {
+        int num = pq.poll();
+        hs.remove(num);
+        return num;
+        
+    }
+    
+    public void addBack(int num) {
+        if(!hs.contains(num)){
+            hs.add(num);
+            pq.add(num);
+        }
+        
+    }
+}
+
+/**
+ * Your SmallestInfiniteSet object will be instantiated and called as such:
+ * SmallestInfiniteSet obj = new SmallestInfiniteSet();
+ * int param_1 = obj.popSmallest();
+ * obj.addBack(num);
+ */
+
+Approach - II
+class SmallestInfiniteSet {
+    int arr[];
+    int i=1;
+    public SmallestInfiniteSet() {
+        arr=new int[1001];
+    }
+    
+    public int popSmallest() {
+        int j;
+        for(j=i;i<1001;j++)
+        if(arr[j]==0){
+            arr[j]=1;
+            i=j;
+            break;
+        }
+        return j;
+    }
+    
+    public void addBack(int num) {
+        if(num<i)
+        i=num;
+        arr[num]=0;
+    }
+}
+
+/**
+ * Your SmallestInfiniteSet object will be instantiated and called as such:
+ * SmallestInfiniteSet obj = new SmallestInfiniteSet();
+ * int param_1 = obj.popSmallest();
+ * obj.addBack(num);
+ */
