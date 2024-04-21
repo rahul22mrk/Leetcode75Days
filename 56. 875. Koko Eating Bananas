@@ -1,0 +1,31 @@
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        //find the max ele from piles
+        int maxEle=Integer.MIN_VALUE;
+        for(int ele:piles){
+            maxEle=Math.max(maxEle,ele);
+        }
+
+        int start=1;
+        int end=maxEle;
+        //search for the ans
+        while(start<end){
+            int mid=start+(end-start)/2;
+            if(!solve(piles,h,mid)){
+                start=mid+1;
+            }else{
+                end=mid;
+            }
+
+        }
+        return start;
+    }
+
+    private boolean solve(int []piles,int h,int speed){
+        int hrs=0;
+        for(int ele:piles){
+            hrs += (ele+speed-1)/speed;
+        }
+        return hrs<=h;
+    }
+}
